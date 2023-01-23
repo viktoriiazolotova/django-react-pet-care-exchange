@@ -19,6 +19,7 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from petsitters import views
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
@@ -26,6 +27,9 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
+    path('api/petsitters/', views.petsitters_list),
+    path('api/petsitters/<int:pk>/', views.petsitters_details),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += [re_path(r'^.*', TemplateView.as_view(template_name='index.html'))]
