@@ -170,10 +170,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 #     'PAGE_SIZE': 3
 
-# }
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000'
-# )
+
 CORS_ORIGIN_ALLOW_ALL = True
 #for image upload if needed
 FILE_UPLOAD_PERMISSION = 0o640
