@@ -156,20 +156,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+#uncomment to turn on authenfication
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#     ],
     
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
         
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    #check if needed this 
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 3
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+#     #check if needed this 
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 3
 
-}
+# }
 CORS_ORIGIN_ALLOW_ALL = True
 #for image upload if needed
 FILE_UPLOAD_PERMISSION = 0o640
