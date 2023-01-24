@@ -16,6 +16,7 @@ const PetsittersList = ({ petsitters, loadPetsitterOnclick }) => {
       <ul className="petsitters-list-no-bullet">
         {getPetsittersCards(petsitters)}
       </ul>
+      <Button variant="outline-primary">Edit</Button>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PetsittersList from "./components/PetsittersList";
+import NavScrollExample from "./components/NavBar";
 import { API_URL } from "./constants";
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"></header>
-
+      {/* <OffcanvasExample></OffcanvasExample> */}
+      <NavScrollExample></NavScrollExample>
       <h1>Welcome to the PetCareExchange!</h1>
       <h2>Select PetSitter</h2>
       <PetsittersList
