@@ -30,6 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #generated new key and put in .env since original was exposed to github
 SECRET_KEY = os.environ.get("SECRET_KEY")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -94,11 +95,11 @@ WSGI_APPLICATION = 'pet_care_exchange.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':'pet_care_exchange',
-        'USER': 'postgres',
-        'PASSWORD': '123',
-        'HOST': 'localhost'
+        'ENGINE': os.environ.get("DB_ENGINE") ,
+        'NAME':os.environ.get("DB_NAME") ,
+        'USER': os.environ.get("DB_USER") ,
+        'PASSWORD': os.environ.get("DB_PASSWORD") ,
+        'HOST': os.environ.get("DB_HOST") ,
     }
 }
 
