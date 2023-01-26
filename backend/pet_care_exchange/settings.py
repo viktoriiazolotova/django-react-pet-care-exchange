@@ -181,7 +181,7 @@ AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created und
 
 #added to fix issue with migrations since used email as authenfication
 # https://django-allauth.readthedocs.io/en/latest/advanced.html
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
