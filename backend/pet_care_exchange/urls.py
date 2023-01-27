@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from petsitters import views
+# from pets import views
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
@@ -29,6 +30,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/petsitters/', views.petsitters_list),
     path('api/petsitters/<int:pk>/', views.petsitters_details),
+    #api for pets under pets urls folder
+    path('api/pets/', include('pets.urls'))
+    # path('api/pets/', views.pets_details),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
