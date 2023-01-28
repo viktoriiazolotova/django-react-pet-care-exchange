@@ -47,6 +47,7 @@ def petsitters_detail(request, pk):
     
     elif request.method == 'PUT':
         serializer = PetsitterSerializer(petsitters_list, data=request.data,context={'request': request})
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response('Petsitter successfully updated', status=status.HTTP_200_OK)
