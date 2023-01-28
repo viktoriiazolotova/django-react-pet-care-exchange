@@ -5,4 +5,5 @@ class PetsitterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=Petsitter
-        fields=('pk', 'name', 'email', 'zipcode', 'city', 'is_available_help', 'pet_type')
+        fields=('pk', 'name', 'email', 'zipcode', 'city', 'is_available_help', 'pet_type', 'pets')
+   

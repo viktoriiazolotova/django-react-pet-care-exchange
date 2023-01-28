@@ -19,20 +19,24 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from petsitters import views
+# from petsitters import views
 # from pets import views
 
 urlpatterns = [
+    #urls were created for authorizations
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
-    path('api/petsitters/', views.petsitters_list),
-    path('api/petsitters/<int:pk>/', views.petsitters_details),
+
     #api for pets under pets urls folder
-    path('api/pets/', include('pets.urls'))
-    # path('api/pets/', views.pets_details),
+    path('api/pets/', include('pets.urls')),
+      
+    #api for petsitters under petsitters urls folder
+    path('api/petsitters/', include('petsitters.urls')),
+ 
+    path('admin/', admin.site.urls),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

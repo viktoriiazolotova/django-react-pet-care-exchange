@@ -2,25 +2,15 @@
 
 # Create your views here.
 
+
+from .models import Petsitter
+from pets.models import Pet
+from pets.serializers import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-
-from .models import Petsitter
 from .serializers import *
 
-# from rest_framework import permissions
-# from rest_framework.decorators import authentication_classes, permission_classes
-#to disable authenfication
-
-#try add this check if user is authenticated later
-# from rest_framework.permissions import IsAuthenticated
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-
-#did not work
-# @authentication_classes([])
-# @permission_classes([])
 @api_view(['GET','POST'])
 def petsitters_list(request):
     # permission_classes = (permissions.AllowAny, )
@@ -43,7 +33,7 @@ def petsitters_list(request):
 # @authentication_classes([])
 # @permission_classes([])  
 @api_view(['GET', 'PUT', 'DELETE'])
-def petsitters_details(request, pk):
+def petsitters_detail(request, pk):
     # permission_classes = (permissions.AllowAny, )
     try:
         petsitter = Petsitter.objects.get(pk=pk)
@@ -52,6 +42,7 @@ def petsitters_details(request, pk):
     
     if request.method == 'GET':
         serializer = PetsitterSerializer(petsitter)
+        # pets = petsitter.pets.all()
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'PUT':
@@ -64,3 +55,40 @@ def petsitters_details(request, pk):
     elif request.method == 'DELETE':
         petsitter.delete()
         return Response('Petsitter successfully deleted', status=status.HTTP_200_OK)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def petsitters_detail_pets_list(request, pk):
+    # permission_classes = (permissions.AllowAny, )
+    try:
+        petsitter = Petsitter.objects.get(pk=pk)
+    except Petsitter.DoesNotExist:
+        return Response({"msg": f"Can not find petsitter with id {pk}"},status=status.HTTP_404_NOT_FOUND)
+    
+    pets = petsitter.pets.all()
+    if request.method == 'GET':
+        # serializer = PetsitterSerializer(petsitter)
+        pets_list = []
+        for pet in pets:
+            pet_dict = {
+                "pk": pet.pk,
+                "pet_name": pet.pet_name,
+                "pet_type_needs_care": pet.pet_type_needs_care,
+                "pet_needs_description": pet.pet_needs_description,
+                "is_needs_care": pet.is_needs_care,
+                "petsitter": pet.petsitter.name,
+                # "pet_photo": pet.pet_photo
+            }
+            pets_list.append(pet_dict)
+      
+        return Response(pets_list, status=status.HTTP_200_OK)
+    
+    # elif request.method == 'PUT':
+    #     serializer = PetsitterSerializer(petsitters_list, data=request.data,context={'request': request})
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response('Petsitter successfully updated', status=status.HTTP_200_OK)
+
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # elif request.method == 'DELETE':
+    #     petsitter.delete()
+    #     return Response('Petsitter successfully deleted', status=status.HTTP_200_OK)
