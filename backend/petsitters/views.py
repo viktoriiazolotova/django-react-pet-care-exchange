@@ -42,7 +42,7 @@ def petsitters_detail(request, pk):
         return Response({"msg": f"Can not find petsitter with id {pk}"},status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
-        serializer = PetsitterSerializer(petsitter)
+        serializer = PetsitterSerializer(petsitter, context={'request': request})
         # pets = petsitter.pets.all()
         return Response(serializer.data, status=status.HTTP_200_OK)
     
