@@ -22,7 +22,7 @@ def petsitters_list(request):
     
     elif request.method == 'POST':
         
-        serializer = PetsitterSerializer(data=request.data)
+        serializer = PetsitterSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             # print(data)
