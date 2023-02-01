@@ -10,7 +10,7 @@ class Pet(models.Model):
     # The default is blank=False. If blank=False, the field will be required.
     pet_needs_description = models.CharField(max_length=200, blank=True)
     is_needs_care = models.BooleanField(default=False)
-    pet_photo = models.ImageField(upload_to='images/', default=None)
+    # pet_photo = models.ImageField(upload_to='images/', null=True, blank=True)
 
 
     def __str__(self):

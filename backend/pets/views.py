@@ -48,7 +48,7 @@ def pets_list(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'POST':
-        serializer = PetSerializer(data=request.data)
+        serializer = PetSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -70,7 +70,7 @@ def pet_detail(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'PUT':
-        serializer = PetSerializer(pets_list, data=request.data,context={'request': request})
+        serializer = PetSerializer(pet, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response('Pet successfully updated', status=status.HTTP_200_OK)

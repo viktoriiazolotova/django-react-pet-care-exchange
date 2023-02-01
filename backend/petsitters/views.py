@@ -58,7 +58,7 @@ def petsitters_detail(request, pk):
         petsitter.delete()
         return Response('Petsitter successfully deleted', status=status.HTTP_200_OK)
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def petsitters_detail_pets_list(request, pk):
     # permission_classes = (permissions.AllowAny, )
     try:
@@ -67,8 +67,9 @@ def petsitters_detail_pets_list(request, pk):
         return Response({"msg": f"Can not find petsitter with id {pk}"},status=status.HTTP_404_NOT_FOUND)
     
     pets = petsitter.pets.all()
+   
     if request.method == 'GET':
-        # serializer = PetsitterSerializer(petsitter)
+      
         pets_list = []
         for pet in pets:
             pet_dict = {
@@ -77,13 +78,13 @@ def petsitters_detail_pets_list(request, pk):
                 "pet_type_needs_care": pet.pet_type_needs_care,
                 "pet_needs_description": pet.pet_needs_description,
                 "is_needs_care": pet.is_needs_care,
-                "petsitter": pet.petsitter.name,
+                "petsitter": pet.petsitter.name
                 # "pet_photo": pet.pet_photo
             }
             pets_list.append(pet_dict)
-      
-        return Response(pets_list, status=status.HTTP_200_OK)
-    
+       
+        return Response(pets_list, status=status.HTTP_200_OK) #working
+       
     # elif request.method == 'PUT':
     #     serializer = PetsitterSerializer(petsitters_list, data=request.data,context={'request': request})
     #     if serializer.is_valid():
