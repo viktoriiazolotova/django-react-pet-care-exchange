@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os
-
+import django_heroku
+import dj_database_url
+from decouple import config
 
 load_dotenv()
 
@@ -30,16 +32,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 #generated new key and put in .env since original was exposed to github
 SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,7 +60,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+   
 
     'corsheaders.middleware.CorsMiddleware',
 
@@ -66,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'pet_care_exchange.urls'
@@ -96,13 +103,22 @@ WSGI_APPLICATION = 'pet_care_exchange.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get("DB_ENGINE") ,
+       'ENGINE': os.environ.get("DB_ENGINE"),
         'NAME':os.environ.get("DB_NAME") ,
         'USER': os.environ.get("DB_USER") ,
         'PASSWORD': os.environ.get("DB_PASSWORD") ,
         'HOST': os.environ.get("DB_HOST") ,
     }
 }
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':os.environ.get("DB_NAME") ,
+#         'USER': os.environ.get("DB_USER") ,
+#         'PASSWORD': os.environ.get("DB_PASSWORD") ,
+#         'HOST': os.environ.get("DB_HOST") ,
+#     }
+# }
 
 
 # Password validation
@@ -144,10 +160,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-# STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
 
 
 MEDIA_URL= '/media/'
@@ -186,3 +202,8 @@ AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created und
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
+WHITENOISE_USE_FINDERS = True
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
+if "DYNO" in os.environ:
+    STATIC_ROOT = 'static'
