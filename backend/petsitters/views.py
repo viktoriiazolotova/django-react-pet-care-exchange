@@ -33,7 +33,7 @@ def petsitters_list(request):
 #did not work
 # @authentication_classes([])
 # @permission_classes([])  
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PATCH', 'PUT', 'DELETE'])
 def petsitters_detail(request, pk):
     # permission_classes = (permissions.AllowAny, )
     try:
@@ -46,9 +46,17 @@ def petsitters_detail(request, pk):
         # pets = petsitter.pets.all()
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    elif request.method == 'PATCH':
+        serializer = PetsitterSerializer(petsitter, data=request.data,context={'request': request}, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     elif request.method == 'PUT':
-        serializer = PetsitterSerializer(petsitters_list, data=request.data,context={'request': request})
-        print(request.data)
+        serializer = PetsitterSerializer(petsitter, data=request.data,context={'request': request})
+        # print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response('Petsitter successfully updated', status=status.HTTP_200_OK)
