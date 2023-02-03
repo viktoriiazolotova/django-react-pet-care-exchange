@@ -110,6 +110,11 @@ DATABASES = {
         'HOST': os.environ.get("DB_HOST") ,
     }
 }
+
+# DATABASES = {
+#   ‘default’: dj_database_url.config(default=os.environ[‘ENGINE’], conn_max_age=600)
+# }
+
 # DATABASES = {
 #     'default': {
 #        'ENGINE': 'django.db.backends.postgresql',
