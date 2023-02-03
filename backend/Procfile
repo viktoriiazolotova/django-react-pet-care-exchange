@@ -1,2 +1,2 @@
-release: python pet_care_exchange/manage.py migrate
-web: web: gunicorn --pythonpath backend pet-care-exchange.wsgi
+release: python backend/manage.py migrate
+web: gunicorn pet-care-exchange.wsgi
