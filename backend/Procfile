@@ -1,2 +1,2 @@
 release: python backend/manage.py migrate
-web: gunicorn pet_care_exchange.wsgi
+web gunicorn pet_care_exchange.wsgi:application --log-file -
