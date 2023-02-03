@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 import os
 import django_heroku
 import dj_database_url
-# from decouple import config
+# from decouple import config?
 
 load_dotenv()
 
@@ -35,15 +35,15 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
+# DEBUG = False when just in Heroku, for production
 DEBUG=True
-# ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+# ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com'] to add all heroku, local services
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',?
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -159,7 +159,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' #'static/'?
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static')
 # ]
@@ -202,8 +202,9 @@ AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created und
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
-WHITENOISE_USE_FINDERS = True
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
-if "DYNO" in os.environ:
-    STATIC_ROOT = 'static'
+
+# WHITENOISE_USE_FINDERS = True
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
+# if "DYNO" in os.environ:
+#     STATIC_ROOT = 'static'

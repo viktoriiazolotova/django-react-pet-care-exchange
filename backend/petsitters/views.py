@@ -86,10 +86,11 @@ def petsitters_detail_pets_list(request, pk):
                 "pet_type_needs_care": pet.pet_type_needs_care,
                 "pet_needs_description": pet.pet_needs_description,
                 "is_needs_care": pet.is_needs_care,
-                "petsitter": pet.petsitter.name
+                "petsitter": pet.petsitter.pk
                 # "pet_photo": pet.pet_photo
             }
             pets_list.append(pet_dict)
+        print(pets_list)
        
         return Response(pets_list, status=status.HTTP_200_OK) #working
        
