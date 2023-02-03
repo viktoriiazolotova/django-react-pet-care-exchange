@@ -37,13 +37,13 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False when just in Heroku, for production
 DEBUG=True
-# ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com'] to add all heroku, local services
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','pet-care-exchange.herokuapp.com', '.herokuapp.com' ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'whitenoise.runserver_nostatic',?
+   
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,9 +60,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
-   
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'corsheaders.middleware.CorsMiddleware',
 
@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'pet_care_exchange.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': os.environ.get("DB_ENGINE"),
+       'ENGINE': 'django.db.backends.postgresql',
         'NAME':os.environ.get("DB_NAME") ,
         'USER': os.environ.get("DB_USER") ,
         'PASSWORD': os.environ.get("DB_PASSWORD") ,
@@ -159,7 +159,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/' #'static/'?
+STATIC_URL = 'static/' 
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static')
 # ]
@@ -204,7 +204,7 @@ AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created und
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # WHITENOISE_USE_FINDERS = True
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
 # if "DYNO" in os.environ:
 #     STATIC_ROOT = 'static'
