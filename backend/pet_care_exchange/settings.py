@@ -165,11 +165,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/' 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static')
-# ]
-STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
 
+STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -208,8 +208,6 @@ AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created und
 # ACCOUNT_USERNAME_REQUIRED = False
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-# WHITENOISE_USE_FINDERS = True
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
-# if "DYNO" in os.environ:
-#     STATIC_ROOT = 'static'
+django_heroku.settings(locals())
