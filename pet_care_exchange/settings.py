@@ -102,21 +102,21 @@ WSGI_APPLICATION = 'pet_care_exchange.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-        'NAME':os.environ.get("DB_NAME") ,
-        'USER': os.environ.get("DB_USER") ,
-        'PASSWORD': os.environ.get("DB_PASSWORD") ,
-        'HOST': os.environ.get("DB_HOST") ,
-    }
-}
-
-
-# DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'],  conn_max_age=600) }
 # DATABASES = {
-#   'default': dj_database_url.config(default=os.environ['DATABASE_URL'], conn_max_age=600)
+#     'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':os.environ.get("DB_NAME") ,
+#         'USER': os.environ.get("DB_USER") ,
+#         'PASSWORD': os.environ.get("DB_PASSWORD") ,
+#         'HOST': os.environ.get("DB_HOST") ,
+#     }
 # }
+
+# DATABASES = {}
+# DATABASES['default']= dj_database_url.config(default=os.environ['DATABASE_URL'],  conn_max_age=600)
+DATABASES = {
+  'default': dj_database_url.config(default=os.environ['DATABASE_URL'], conn_max_age=600)
+}
 
 
 
@@ -164,6 +164,7 @@ STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -203,5 +204,7 @@ AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created und
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 django_heroku.settings(locals())
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
