@@ -35,9 +35,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False when just in Heroku, for production
+# DEBUG = False 
+# when just in Heroku, for production
 DEBUG=True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','pet-care-exchange.herokuapp.com', '.herokuapp.com' ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','pet-care-exchange.herokuapp.com', 'pet-care-exchange-backend.herokuapp.com' ]
 
 
 # Application definition
@@ -111,18 +112,12 @@ DATABASES = {
     }
 }
 
+
+# DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'],  conn_max_age=600) }
 # DATABASES = {
 #   'default': dj_database_url.config(default=os.environ['DATABASE_URL'], conn_max_age=600)
 # }
-# DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#         'NAME':os.environ.get("DB_NAME") ,
-#         'USER': os.environ.get("DB_USER") ,
-#         'PASSWORD': os.environ.get("DB_PASSWORD") ,
-#         'HOST': os.environ.get("DB_HOST") ,
-#     }
-# }
+
 
 
 # Password validation
