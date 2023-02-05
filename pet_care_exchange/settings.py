@@ -15,7 +15,6 @@ from dotenv import load_dotenv
 import os
 import django_heroku
 import dj_database_url
-# from decouple import config?
 
 load_dotenv()
 
@@ -53,7 +52,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'accounts',
     'petsitters',
     'pets',
    
@@ -64,9 +62,7 @@ MIDDLEWARE = [
     
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'corsheaders.middleware.CorsMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -112,8 +108,6 @@ WSGI_APPLICATION = 'pet_care_exchange.wsgi.application'
 #     }
 # }
 
-# DATABASES = {}
-# DATABASES['default']= dj_database_url.config(default=os.environ['DATABASE_URL'],  conn_max_age=600)
 DATABASES = {
   'default': dj_database_url.config(default=os.environ['DATABASE_URL'], conn_max_age=600)
 }
@@ -129,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        #this does not work
         'OPTIONS': {
             'min_length': 6,
         }
@@ -174,35 +167,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#uncomment to turn on authenfication
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.IsAuthenticated',
-#     ],
-    
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-        
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#     ),
-#     #check if needed this 
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-#     'PAGE_SIZE': 3
-
-
 CORS_ORIGIN_ALLOW_ALL = True
 #for image upload if needed
 FILE_UPLOAD_PERMISSION = 0o640
-
-
-AUTH_USER_MODEL = 'accounts.UserAccount' # name of custom user model created under models
-
-#added to fix issue with migrations since used email as authenfication
-# https://django-allauth.readthedocs.io/en/latest/advanced.html
-# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_USERNAME_REQUIRED = False
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-
 
 
 django_heroku.settings(locals())

@@ -13,7 +13,7 @@ from .serializers import *
 
 @api_view(['GET','POST'])
 def petsitters_list(request):
-    # permission_classes = (permissions.AllowAny, )
+
     if request.method == 'GET':
         data = Petsitter.objects.all()
         serializer = PetsitterSerializer(data, context={'request': request}, many=True)
@@ -30,12 +30,10 @@ def petsitters_list(request):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-#did not work
-# @authentication_classes([])
-# @permission_classes([])  
+
 @api_view(['GET', 'PATCH', 'PUT', 'DELETE'])
 def petsitters_detail(request, pk):
-    # permission_classes = (permissions.AllowAny, )
+  
     try:
         petsitter = Petsitter.objects.get(pk=pk)
     except Petsitter.DoesNotExist:
@@ -68,7 +66,7 @@ def petsitters_detail(request, pk):
 
 @api_view(['GET'])
 def petsitters_detail_pets_list(request, pk):
-    # permission_classes = (permissions.AllowAny, )
+  
     try:
         petsitter = Petsitter.objects.get(pk=pk)
     except Petsitter.DoesNotExist:
@@ -90,17 +88,7 @@ def petsitters_detail_pets_list(request, pk):
                 # "pet_photo": pet.pet_photo
             }
             pets_list.append(pet_dict)
-        print(pets_list)
+        # print(pets_list)
        
         return Response(pets_list, status=status.HTTP_200_OK) #working
-       
-    # elif request.method == 'PUT':
-    #     serializer = PetsitterSerializer(petsitters_list, data=request.data,context={'request': request})
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response('Petsitter successfully updated', status=status.HTTP_200_OK)
-
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    # elif request.method == 'DELETE':
-    #     petsitter.delete()
-    #     return Response('Petsitter successfully deleted', status=status.HTTP_200_OK)
+   

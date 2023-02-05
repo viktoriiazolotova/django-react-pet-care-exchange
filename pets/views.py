@@ -58,7 +58,7 @@ def pets_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def pet_detail(request, pk):
-    # permission_classes = (permissions.AllowAny, )
+ 
     try:
         pet = Pet.objects.get(pk=pk)
     except Pet.DoesNotExist:
@@ -66,7 +66,7 @@ def pet_detail(request, pk):
     
     if request.method == 'GET':
         serializer = PetSerializer(pet)
-        # pets = petsitter.pets.all()
+    
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'PUT':
