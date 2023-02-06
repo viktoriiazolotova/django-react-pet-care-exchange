@@ -8,4 +8,6 @@ class PetAdmin(admin.ModelAdmin):
     list_filter = ('id', 'is_needs_care')
     search_fields = ('is_needs_care',)
 
+
 admin.site.register(Pet, PetAdmin)
+
