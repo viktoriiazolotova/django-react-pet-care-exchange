@@ -38,7 +38,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # DEBUG = False 
 # when just in Heroku, for production
 DEBUG=True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','pet-care-exchange.herokuapp.com', 'pet-care-exchange-backend.herokuapp.com' ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','pet-care-exchange.herokuapp.com', 'pet-care-exchange-backend.herokuapp.com', 'pet-care-exchange-react.web.app' ]
 
 
 # Application definition
