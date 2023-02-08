@@ -15,6 +15,7 @@ from .serializers import *
 def petsitters_list(request):
     # permission_classes = (permissions.AllowAny, )
     if request.method == 'GET':
+        
         data = Petsitter.objects.all()
         serializer = PetsitterSerializer(data, context={'request': request}, many=True)
 
@@ -47,6 +48,7 @@ def petsitters_detail(request, pk):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == 'PATCH':
+       
         serializer = PetsitterSerializer(petsitter, data=request.data,context={'request': request}, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -63,6 +65,20 @@ def petsitters_detail(request, pk):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
+
+        #to delete picture that not used by any other petsitter
+        all_petsitters_except_current = Petsitter.objects.exclude(pk=petsitter.pk)
+        # print(all_petsitters_except_current)
+        all_images_except_current = all_petsitters_except_current.values_list('photo_petsitter')
+        # print("all_images_except_current", all_images_except_current)
+        images_list = set()
+        for images in all_images_except_current:
+            images_list.add(images[0])
+        # print("images_list:", images_list)
+        if petsitter.photo_petsitter not in images_list:
+            # print("picture should be deleted", petsitter.photo_petsitter)
+            petsitter.photo_petsitter.delete()
+        
         petsitter.delete()
         return Response('Petsitter successfully deleted', status=status.HTTP_200_OK)
 

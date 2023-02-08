@@ -10,8 +10,8 @@ class Petsitter(models.Model):
     is_available_help = models.BooleanField(default=False)
     pet_type_take_care = models.CharField(max_length=50)
     is_looking_for_help = models.BooleanField(default=False)
-    photo_petsitter = models.ImageField(default="/images/blank-profile-picture.jpg",upload_to='images/')
-    
+    photo_petsitter = models.ImageField(default="/blank-profile-picture.jpg")
+    # photo_petsitter = models.ImageField(default="https://pet-care-exchange-static.s3.us-west-2.amazonaws.com/blank-profile-picture.jpg")
 
     
     def __str__(self):
