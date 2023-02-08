@@ -57,6 +57,7 @@ def petsitters_detail(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     elif request.method == 'PUT':
+        
         serializer = PetsitterSerializer(petsitter, data=request.data,context={'request': request})
         # print(request.data)
         if serializer.is_valid():
@@ -75,7 +76,7 @@ def petsitters_detail(request, pk):
         for images in all_images_except_current:
             images_list.add(images[0])
         # print("images_list:", images_list)
-        if petsitter.photo_petsitter not in images_list:
+        if petsitter.photo_petsitter not in images_list and  petsitter.photo_petsitter != '/blank-profile-picture.jpg':
             # print("picture should be deleted", petsitter.photo_petsitter)
             petsitter.photo_petsitter.delete()
         
