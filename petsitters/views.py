@@ -15,8 +15,8 @@ from .serializers import *
 def petsitters_list(request):
     # permission_classes = (permissions.AllowAny, )
     if request.method == 'GET':
-        
-        data = Petsitter.objects.all()
+        #sorting by newest petsitetrs
+        data = Petsitter.objects.all().order_by('-pk')
         serializer = PetsitterSerializer(data, context={'request': request}, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
