@@ -1,14 +1,13 @@
 # PetCareExchange API
 
-This API allows you to manage petsitters and pets, including creating, editing, getting and deleting them. It is built using Django Rest Framework .
-
+PetCareExchange API is a RESTful web API that allows you to manage pet sitters and pets, including creating, editing, getting, and deleting them. It is built using the Django Rest Framework and uses PostgreSQL as a powerful and open-source relational database management system. Additionally, it leverages AWS S3, a web-based cloud storage service, for storing pet images. To access the front-end for this API, visit [front-end-pet-care-exchange](https://github.com/viktoriiazolotova/front-end-pet-care-exchange).
 
 ## Technologies Used:
 
 1. Django: a high-level Python web framework for the backend
 2. PostgreSQL: A powerful, open-source relational database management system.
 3. AWS S3: A web-based cloud storage service for storing images.
-4. React.js - for building front end. To see GithubRepo: https://github.com/viktoriiazolotova/front-end-pet-care-exchange.
+4. React.js - for building front end.
 5. Heroku: a platform for deploying and running applications.
 
 ## Basic Features:
