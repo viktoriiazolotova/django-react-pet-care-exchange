@@ -4,11 +4,11 @@ PetCareExchange API is a RESTful web API that allows you to manage pet sitters a
 
 ## Technologies Used:
 
-1. Django: a high-level Python web framework for the backend
-2. PostgreSQL: A powerful, open-source relational database management system.
-3. AWS S3: A web-based cloud storage service for storing images.
-4. React.js - for building front end.
-5. Heroku: a platform for deploying and running applications.
+1. **Django:** a high-level Python web framework for the backend
+2. **PostgreSQL:** A powerful, open-source relational database management system.
+3. **AWS S3:** A web-based cloud storage service for storing images.
+4. **React.js** - for building front end.
+5. **Heroku:** a platform for deploying and running applications.
 
 ## Basic Features:
 
